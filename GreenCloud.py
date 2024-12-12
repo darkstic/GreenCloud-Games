@@ -1,6 +1,8 @@
 import webbrowser
 import time
 
+online_features=False
+
 # First number is for main version features, Second is for overall list release wave, third is for total number of games.
 Version="1.1.10"
 
@@ -40,6 +42,18 @@ def game_menu():
         game_menu()
     elif game_selection=="q":
         exit()
+    elif game_selection=="s":
+        print("""
+
+""")
+        suggestion=input("Enter your suggestion for the dev here:  ")
+        if online_features==True:
+            pointless_variable="Placeholder"
+            # Enter future messaging function here
+        else:
+            print("Feedback Features are not yet available")
+            time.sleep(2)
+        game_menu()
     else:
         game_selection=int(game_selection)
 
