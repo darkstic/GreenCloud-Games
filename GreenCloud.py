@@ -26,6 +26,9 @@ games_list=[
 
 dependency_path="C:\\Users\\Public\\Documents\\Greencloud_Custom.txt"
 
+with open(dependency_path, 'w') as file:
+    file.write("")
+
 with open(dependency_path, 'r') as file:
     file_contents=file.read()
 
@@ -38,7 +41,6 @@ custom_list= ast.literal_eval(file_contents.strip())
 
 for entry in custom_list:
     games_list.append(entry)
-
 
 
 
