@@ -20,3 +20,9 @@ jobs:
 
     - name: Build .app
       run: pyinstaller --onefile --windowed GreenCloud.py
+
+    - name: Upload .app artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: GreenCloud-app
+        path: dist/GreenCloud.app
