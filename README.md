@@ -14,5 +14,5 @@ ________________________________________________________________________________
 URGENT NOTICE!!!
 ______________________________________________________________________________________________________________________
 
-A fatal flaw has been discovered in both Linux and MacOS versions. Windows version remains functional, but custom games 
-addition is currently non-functional. Please standby for a fix before downloading.
+A fatal flaw has been discovered in both Linux and MacOS versions. Windows version remains functional.
+Please standby for a fix before downloading any non Windows Applications.
