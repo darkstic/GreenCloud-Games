@@ -3,11 +3,12 @@ import time
 import os
 import os.path
 import ast
+import sys
 
 online_features=False
 
-# First number is for main version features, Second is for overall list release wave, third is for total number of games.
-Version="2.1.10 [Beta]"
+# First number is for main version features, Second is for overall list release wave, third is for total number of games, last is for fun :)
+Version="2.1.10.4 [Beta]"
 
 games_list=[
     ["Placeholder"],# 0
@@ -26,11 +27,19 @@ games_list=[
 
 dependency_path="C:\\Users\\Public\\Documents\\Greencloud_Custom.txt"
 
-with open(dependency_path, 'w') as file:
-    file.write("")
+def relaunch():
+    python=sys.executable
+    os.execl(python,python, *sys.argv)
 
-with open(dependency_path, 'r') as file:
-    file_contents=file.read()
+if os.path.exists(dependency_path):
+    with open(dependency_path, 'r') as file:
+        file_contents=file.read()
+else:
+    with open(dependency_path, 'w') as file:
+        file_contents=file.write("")
+        time.sleep(0.1)
+        relaunch()
+
 
 file_contents=f"""[
 {file_contents}
@@ -60,6 +69,10 @@ def custom_file():
         time.sleep(3)
         exit()
     else:
+        print("""
+        
+        """)
+        print("Close and reopen app to run custom URL.")
         dependency_path="C:\\Users\\Public\\Documents\\Greencloud_Custom.txt"
         if os.path.isfile(dependency_path):
             with open(dependency_path, 'a') as file:
@@ -73,10 +86,14 @@ def custom_file():
             for line in file:
                 print(line.strip())
 
-    internal_test(dependency_path)
+    # internal_test(dependency_path)
+        relaunch()
 
 
 def game_menu():
+    print("""
+    
+        """)# spacer
     for x, sublist in enumerate(games_list[1:listsize],start=1):
         print(f"{x}: {games_list[x][0]}")
 
@@ -85,7 +102,7 @@ def game_menu():
 
 
 
-""")# Large Spacer
+    """)# Large Spacer
     
 
     game_selection=input("Enter the number for the game you would like to play:  ")
