@@ -5,136 +5,120 @@ import os.path
 import ast
 import sys
 
-online_features=False
+online_features = False
 
 # First number is for main version features, Second is for overall list release wave, third is for total number of games, last is for fun :)
-Version="2.1.10.4 [Beta]"
+Version = "3.2.11.7"
 
-games_list=[
-    ["Placeholder"],# 0
-    ["Slow Roads","https://slowroads.io/"],#                              1
-    ["Deadshot FPS","https://deadshot.io/"],#                             2
-    ["Knockoff Fortnite","https://1v1.lol/"],#                            3
-    ["Best Paper.io","https://paper-io.com/conflict/"],#                  4
-    ["Geogussr Free","https://openguessr.com/"],#                         5
-    ["Minecraft V1.8.8","https://eaglercraft.com/mc/1.8.8/"],#            6
-    ["Trippy AI Generated Minecraft","https://oasis.decart.ai/welcome"],# 7
-    ["What beats rock?","https://www.whatbeatsrock.com/"],#               8
-    ["3D Aim Trainer","https://app.3daimtrainer.com/quick-play"],#        9
-    ["Superhot Prototype","https://superhotgame.com/superhot-prototype"],#10
-]
+categories = {
+    "Driving": [
+        ["Slow Roads", "https://slowroads.io/"],
+    ],
 
+    "Shooter": [
+        ["Deadshot FPS", "https://deadshot.io/"],
+        ["Knockoff Fortnite", "https://1v1.lol/"],
+        ["3D Aim Trainer", "https://app.3daimtrainer.com/quick-play"],
+        ["Superhot Prototype", "https://superhotgame.com/superhot-prototype"],
+    ],
 
-dependency_path="C:\\Users\\Public\\Documents\\Greencloud_Custom.txt"
+    "Horror": [
+        ["Slide in The Woods", "https://horrorgames.io/slide-in-the-woods"],
+    ],
 
-def relaunch():
-    python=sys.executable
-    os.execl(python,python, *sys.argv)
+    "Exploration": [
+        ["Geogussr Free", "https://openguessr.com/"],
+        ["Minecraft V1.8.8", "https://eaglercraft.com/mc/1.8.8/"],
+        ["Trippy AI Generated Minecraft", "https://oasis.decart.ai/welcome"],
+    ],
 
-if os.path.exists(dependency_path):
-    with open(dependency_path, 'r') as file:
-        file_contents=file.read()
-else:
-    with open(dependency_path, 'w') as file:
-        file_contents=file.write("")
-        time.sleep(0.1)
-        relaunch()
+    "Puzzle": [
+        ["what beats rock?", "https://www.whatbeatsrock.com/"],
+    ],
 
+    "Easy-to-run": [
+        ["Best Paper.io", "https://paper-io.com/conflict/"],
+    ],
 
-file_contents=f"""[
-{file_contents}
-]
-"""
+    "Custom": [],
+}
 
-custom_list= ast.literal_eval(file_contents.strip())
+def list_categories():
+    print("Available categories:")
+    for i, category in enumerate(categories.keys(), 1):
+        print(f"{i}. {category}")
 
-for entry in custom_list:
-    games_list.append(entry)
-
-
-
-listsize=len(games_list)
-
-def custom_file():
-    addition=input("Enter custom game title here:  ")
-    print(" ")# Spacer
-    added_url=input("Enter the URL for custom game:  ")
-    print(" ")# Spacer
-
-    print(f"Is this correct? Name: {addition}, URL: {added_url}")
-    confirm_syntax=input("y/n:  ").lower()
-
-    if confirm_syntax!="y":
-        print("Custom game failed to add, relaunch to try again.")
-        time.sleep(3)
-        exit()
+def list_items(category):
+    if category in categories:
+        print(f"Items in {category} category:")
+        for i, item in enumerate(categories[category], 1):
+            print(f"{i}. {item[0]}")
     else:
-        print("""
-        
-        """)
-        print("Close and reopen app to run custom URL.")
-        dependency_path="C:\\Users\\Public\\Documents\\Greencloud_Custom.txt"
-        if os.path.isfile(dependency_path):
-            with open(dependency_path, 'a') as file:
-                file.write(f'["{addition}","{added_url}"],')
-        else:
-            with open(dependency_path, 'w') as file:
-                file.write(f'["{addition}","{added_url}"],')
-                
-    def internal_test(dependency_path):
-        with open(dependency_path, 'r') as file:
-            for line in file:
-                print(line.strip())
+        print("Invalid category")
 
-    # internal_test(dependency_path)
-        relaunch()
+def open_item(category, item_index):
+    if category in categories and 0 <= item_index < len(categories[category]):
+        url = categories[category][item_index][1]
+        webbrowser.open(url)
+    else:
+        print("Invalid item")
 
+def load_custom_category():
+    if os.path.isfile("custom.txt"):
+        with open("custom.txt", "r") as file:
+            custom_items = ast.literal_eval(file.read())
+            categories["Custom"] = custom_items
 
-def game_menu():
-    print("""
-    
-        """)# spacer
-    for x, sublist in enumerate(games_list[1:listsize],start=1):
-        print(f"{x}: {games_list[x][0]}")
-
-    print("Enter 'C' add custom games to list:")
+def add_custom_url():
+    name = input("Enter the name of the custom URL: ")
     print("""
 
+""")
+    url = input("Enter the custom URL: ")
+    print("""
 
+""")
+    categories["Custom"].append([name, url])
+    with open("custom.txt", "w") as file:
+        file.write(str(categories["Custom"]))
 
-    """)# Large Spacer
+def main():
+    load_custom_category()
     
-
-    game_selection=input("Enter the number for the game you would like to play:  ")
-    if game_selection=="v":
-        print(Version)
-        time.sleep(3)
-        print("""
-        
-        """)
-        game_menu()
-    elif game_selection=="q":
-        exit()
-    elif (game_selection=="C") or (game_selection=="c"):
-        custom_file()
-    elif game_selection=="s":
+    while True:
         print("""
 
 """)
-        suggestion=input("Enter your suggestion for the dev here:  ")
-        if online_features==True:
-            pointless_variable="Placeholder"
-            # Enter future messaging function here
+        print("\n1. List categories")
+        print("2. Add custom URL")
+        print("3. Exit")
+        print("""
+
+
+""")
+        choice = input("Enter Selection: ")
+        print("\n")
+        print("\n")
+        print("\n")
+
+        if choice == "1":
+            list_categories()
+            selected_category_index = int(input("Select category number: ")) - 1
+            print("""
+
+""")
+            selected_category = list(categories.keys())[selected_category_index]
+            
+            list_items(selected_category)
+            selected_item_index = int(input("Select an item number: ")) - 1
+            
+            open_item(selected_category, selected_item_index)
+        elif choice == "2":
+            add_custom_url()
+        elif choice == "3":
+            break
         else:
-            print("Feedback Features are not yet available")
-            time.sleep(2)
-        game_menu()
-    else:
-        game_selection=int(game_selection)
+            print("Invalid entry. Please try again.")
 
-        webbrowser.open(games_list[game_selection][1])
-
-        time.sleep(1)
-    game_menu()
-
-game_menu()
+if __name__ == "__main__":
+    main()
