@@ -11,3 +11,5 @@ https://drive.google.com/file/d/1N_uMJ-kdoQP0hrOVV7TyTBjCE6i6WDNQ/view?usp=drive
 Note for Linux and MacOS:
 _______________________________
 Linux and MacOS versions not yet available
+
+![image](https://github.com/user-attachments/assets/9846c85e-0377-4942-8f2f-e26106853c8b)
