@@ -1,9 +1,10 @@
-Version 2.1.10
+Version 4
 ___________________________________________________________________________________________________________________
 
-Added user addition of custom browser games and URLs
+Created new independent web interface and gui systems
+No default browser or software required to run
+Bypasses most control software systems
 
-Note for Linux Users:
-The GreenCloud.deb file is still undergoing debugging and omptimizations and may not be functional
-
-
+Note for Linux and MacOS:
+_______________________________
+Linux and MacOS versions not yet available
