@@ -6,7 +6,7 @@ No default browser or software required to run
 Bypasses most control software systems
 
 The latest version exceeds GitHub's file size limits, so here's a google drive link to download:
-https://drive.google.com/file/d/1x3jQWGK28h8W2hT8CEArf4PvJ64bDOrP/view?usp=drive_link 
+https://drive.google.com/file/d/1x3jQWGK28h8W2hT8CEArf4PvJ64bDOrP/view?usp=drive_link (Windows .EXE file)
 
 Note for Linux and MacOS:
 _______________________________
